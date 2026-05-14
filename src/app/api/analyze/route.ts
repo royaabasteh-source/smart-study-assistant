@@ -42,6 +42,9 @@ export async function POST(req: Request) {
     const formData = await req.formData();
     const file = formData.get('file') as Blob | null;
     const plainText = formData.get('text') as string | null;
+    const difficulty = formData.get('difficulty') as string || 'medium';
+    const questionType = formData.get('questionType') as string || 'short-answer';
+    const studyMode = formData.get('studyMode') as string || 'practice';
 
     let extractedText = '';
     let usedFallback = false;
@@ -54,21 +57,21 @@ export async function POST(req: Request) {
         console.log('Successfully extracted text from PDF.');
       } catch (parseError: any) {
         console.warn('PDF extraction failed, attempting plain text fallback:', parseError.message);
-        
+
         if (plainText && plainText.trim() !== '') {
           extractedText = plainText;
           usedFallback = true;
         } else {
           return NextResponse.json(
-            { 
+            {
               error: 'Failed to process PDF and no fallback text was provided.',
-              details: parseError.message 
+              details: parseError.message
             },
             { status: 422 }
           );
         }
       }
-    } 
+    }
     // 2. Handle Plain Text Input
     else if (plainText && plainText.trim() !== '') {
       extractedText = plainText;
@@ -92,18 +95,23 @@ export async function POST(req: Request) {
 
     // 4. Analyze via AI Service
     try {
-      const resultData = await analyzeStudyContent(extractedText);
+     const resultData = await analyzeStudyContent(
+  extractedText,
+  difficulty,
+  questionType,
+  studyMode
+);
       return NextResponse.json({
         ...resultData,
         source: usedFallback ? 'fallback-text' : (file ? 'pdf' : 'text')
       });
     } catch (aiError: any) {
       console.error('AI Analysis Error:', aiError.message);
-      
+
       // If AI fails, we still return the extracted text so the user doesn't lose progress
       // but indicate the failure.
       return NextResponse.json(
-        { 
+        {
           error: 'Text was extracted successfully, but AI analysis failed.',
           details: aiError.message,
           extractedText: extractedText.substring(0, 500) + '...' // Return a snippet
