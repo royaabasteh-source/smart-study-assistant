@@ -1,85 +1,111 @@
 # Smart Study Assistant
 
 ## 📌 Project Overview
-Smart Study Assistant is a web application that helps students study more efficiently using AI.  
-Users can upload study materials (such as PDF files), and the system automatically generates:
 
-- A summary of the content  
-- Key points  
-- Practice questions  
+Smart Study Assistant is an AI-powered learning platform designed to help students study more efficiently using generative AI.
 
-The goal of this project is to simplify studying and improve understanding of learning materials.
+Users can upload PDF files or paste text content, and the system automatically generates:
 
----
+- Summaries
+- Key points
+- Practice questions
+- Flashcards
 
-## ⚙️ Features
-- Upload PDF files
-- Extract text from documents
-- Generate AI-based:
-  - Summary
-  - Key points
-  - Questions
-- Simple and user-friendly interface
+The application also supports user authentication, personalized history, and interactive study modes.
 
 ---
 
-## 🧠 AI Integration
-The application uses an AI model (via Groq API) to analyze extracted text and generate structured study materials.
+# ✨ Features
 
-The AI is prompted to return results in JSON format:
-- summary
-- keyPoints
-- questions
+## 📄 Study Material Analysis
+- Upload PDF documents
+- Paste raw text
+- AI-powered content analysis
+
+## 🧠 AI Study Generation
+Generate:
+- Summaries
+- Key points
+- Practice questions
+- Flashcards
+
+## 🎯 Question Types
+Supported question modes:
+- Multiple Choice
+- Fill in the Blank
+- Short Answer
+- Long Answer
+
+## ⚙ Difficulty Levels
+Users can choose:
+- Easy
+- Medium
+- Hard
+
+## 🔐 Authentication
+Firebase Authentication with:
+- Register
+- Login
+- Logout
+
+## ☁ Firebase Integration
+- Save analyses to Firestore
+- User-specific history
+- Rename saved analyses
+- Delete saved analyses
+
+## 🎨 Modern UI/UX
+- Glassmorphism design
+- Modal-based history viewer
+- Toast notifications
+- Animated interactions
+- Dark mode support
 
 ---
 
-## 🛠️ Technologies Used
-- Next.js (Frontend + Backend)
+# 🧠 AI Integration
+
+The application uses the Groq API with Llama models for AI-powered content generation.
+
+The AI system is prompt-engineered to generate structured JSON responses including:
+- Summary
+- Key points
+- Questions
+- Flashcards
+
+---
+
+# 🛠 Technologies Used
+
+## Frontend
+- Next.js 16
+- React
+- Tailwind CSS
+- Framer Motion
+
+## Backend
+- Next.js API Routes
 - Node.js
-- Groq API (AI)
-- pdfjs (PDF text extraction)
-- Git & GitHub
+
+## AI
+- Groq API
+- Llama 3.1
+
+## Database & Auth
+- Firebase Firestore
+- Firebase Authentication
+- Firebase Admin SDK
+
+## Other Libraries
+- react-hot-toast
+- lucide-react
+- pdfjs
 
 ---
 
-## 🚀 How to Run the Project
+# 🏗 Architecture
 
-1. Clone the repository:
+The project follows a secure architecture:
 
-git clone https://github.com/royaabasteh-source/smart-study-assistant.git
-
-2.Install dependencies:
-npm install
-
-3.Create a .env.local file and add your API key:
-GROQ_API_KEY=your_api_key_here
-
-4.Run the development server:
-npm run dev
-
-5.Open in browser:
-http://localhost:3000
-
-
-----
-
-
-## ⚠️ Current Limitations
-
-Results are not stored (no database yet)
-
-No user authentication
-
-Output quality depends on AI response
-
-
-## 🔮 Future Improvements
-
-Save results using Firebase
-
-Add flashcards generation (Q&A format)
-
-Improve prompt engineering for better AI responses
-
-Add difficulty levels (easy, medium, hard)
-3ک
+```text
+Frontend → Next.js API Routes → Firebase / AI APIs
