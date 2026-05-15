@@ -1,6 +1,14 @@
 # Smart Study Assistant
 
+## Live Demo
+
+https://smart-study-assistant-beta.vercel.app
+
+---
+
+
 ## 📌 Project Overview
+...
 
 Smart Study Assistant is an AI-powered learning platform designed to help students study more efficiently using generative AI.
 
