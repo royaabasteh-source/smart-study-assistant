@@ -1,3 +1,5 @@
+'use client';
+
 import AnalysisHistory from '@/components/AnalysisHistory';
 import Uploader from '@/components/Uploader';
 import { Toaster } from 'react-hot-toast';
