@@ -29,7 +29,11 @@ interface AnalysisResult {
   flashcards?: Flashcard[];
 }
 
-export default function Uploader() {
+export default function Uploader({
+  onSaved,
+}: {
+  onSaved?: () => void;
+}) {
   const [text, setText] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [difficulty, setDifficulty] = useState('medium');
@@ -142,6 +146,7 @@ userEmail: user.email,
 
       setIsSaved(true);
       toast.success('Analysis saved to history!');
+      onSaved?.();
     } catch (err: any) {
       setError(err.message || 'Failed to save analysis.');
       toast.error(err.message || 'Failed to save analysis.');

@@ -3,8 +3,10 @@ import Uploader from '@/components/Uploader';
 import { Toaster } from 'react-hot-toast';
 import { WandSparkles } from 'lucide-react';
 import Auth from '@/components/Auth';
+import { useState } from 'react';
 
 export default function Home() {
+  const [refreshHistory, setRefreshHistory] = useState(0);
   return (
     
    <main className="min-h-screen bg-[url('/2.jpg')] bg-cover bg-center bg-fixed flex flex-col items-center p-6 md:p-10 relative overflow-hidden">
@@ -38,8 +40,8 @@ export default function Home() {
       </div>
       <div className="z-10 w-full flex flex-col gap-10">
   <Auth />
-  <Uploader />
-  <AnalysisHistory />
+  <Uploader onSaved={() => setRefreshHistory((prev) => prev + 1)} />
+ <AnalysisHistory refreshTrigger={refreshHistory} />
 </div>
 
     </main>

@@ -25,7 +25,11 @@ interface Analysis {
   difficulty?: string;
 }
 
-export default function AnalysisHistory() {
+export default function AnalysisHistory({
+  refreshTrigger,
+}: {
+  refreshTrigger?: number;
+}) {
   const [analyses, setAnalyses] = useState<Analysis[]>([]);
   const [selected, setSelected] = useState<Analysis | null>(null);
   const [loading, setLoading] = useState(true);
@@ -72,7 +76,7 @@ export default function AnalysisHistory() {
   };
 
   fetchHistory();
-}, [user]);
+}, [user, refreshTrigger]);
 
 
   const handleDelete = async (id: string) => {
